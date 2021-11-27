@@ -6,14 +6,17 @@ import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion'
 
 function ApiRequests() {
-    const [data, setData] = React.useState(null);    
+    const [data, setData] = React.useState(null);      
     
     React.useEffect(() => {fetch("/api").then((res) => res.json())
         .then((data) => setData(data));
     }, []) 
-
-    const myFunction=(event)=>{
+    
+    const MyFunction=(event)=>{        
         console.log(event.target.value)
+        let endPoint = `/api/delete/${event.target.value}`
+        fetch(endPoint).then((res) => res.json())
+            .then((data) => setData(data));              
     }
     
     const listItems = (data || []).map((element) =>
@@ -35,7 +38,7 @@ function ApiRequests() {
                             <Col xs={4}>{element.date_completion}</Col>
                             <Col xs={4} md={2}>{element.completed}</Col>
                             <Col className="buttons mt-2" xs={12}>                                
-                                <Button onClick={myFunction} value={element.id} className="m-1 bg-danger text-light text-right">Remove</Button>
+                                <Button onClick={MyFunction} value={element.id} className="m-1 bg-danger text-light text-right">Remove</Button>
                                 <Button className="m-1 bg-success text-light text-right">Update</Button>                                
                             </Col>                                                                                   
                         </Row>
@@ -49,7 +52,7 @@ function ApiRequests() {
             <Row className="m-0">
                 <a href="#" className="btn bg-info text-success col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
             </Row>                   
-            {listItems}
+            {listItems}            
         </div>
     );
 }
