@@ -1,13 +1,15 @@
 import React from "react";
 import './ApiRequests.css';
+import Header from '../Header/Header'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion'
 
 function ApiRequests() {
-    const [data, setData] = React.useState(null);         
+    const [data, setData] = React.useState(null);       
     
+
     React.useEffect(() => {fetch("/api").then((res) => res.json())
         .then((data) => setData(data));
     }, []) 
@@ -21,23 +23,23 @@ function ApiRequests() {
 
     const UpdateStatus=(event)=>{        
         let endPoint;        
-        if(event.target.id==='Pending'){
+        if(event.target.id==='Pending'){            
             endPoint = `/api/update/${event.target.value}/Completed`
-        }else{
+        }else{            
             endPoint = `/api/update/${event.target.value}/Pending`
         }        
         fetch(endPoint).then((res) => res.json())
             .then((data) => setData(data));                     
-    }
-    
+    }    
+        
     const listItems = (data || []).map((element) =>
         <div className="text-center">
             <Accordion className="w-75 mx-auto mb-2" defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
                         <Accordion.Header>
                             <Col xs={12}>
-                                <div className="text-dark font-italic">{element.id}.{element.name}</div>
-                            </Col>                                                                                                         
+                                <div className="text-dark h5">{element.id}.{element.name}</div>
+                            </Col>                                                                                                                                
                         </Accordion.Header>
                     <Accordion.Body>
                         <Row className="text-center todo-list">
@@ -60,8 +62,9 @@ function ApiRequests() {
     );    
     return (
         <div className="requests">
+            <Header />
             <Row className="m-0">
-                <a href="#" className="btn bg-info text-success col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
+                <a href="/add_todo" className="btn bg-info text-success col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
             </Row>                   
             {listItems}
         </div>

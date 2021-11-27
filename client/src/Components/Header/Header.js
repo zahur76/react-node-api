@@ -3,7 +3,7 @@ import './Header.css';
 
 function Header() {    
     return (
-        <div className="header">        
+        <div className="header text-center">        
             <h1>Node-React-API</h1>
         </div>
     );
