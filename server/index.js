@@ -8,9 +8,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 var jsonParser = bodyParser.json()
 
-// Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../client/build')));
-
 const sqlite3 = require('sqlite3');
 // open up the SQLite database in './db.sqlite'
 const db = new sqlite3.Database('./all_character.db', (err)=> {
@@ -23,7 +20,12 @@ const db = new sqlite3.Database('./all_character.db', (err)=> {
 
 const PORT = process.env.PORT;
 
+
+// App initialisation
 const app = express();
+
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.get("/api", (req, res) => {
   db.all("SELECT * FROM characters;", (error, rows) => { 
@@ -82,10 +84,15 @@ app.get("/api/update/:id/:status", (req, res) => {
   })  
 });
 
-app.post('/api/add_todo', jsonParser, function(req,res) {      
+app.post('/api/add_todo', jsonParser, function(req,res) { 
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; 
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();    
+    newdate = day+ "/" + month + "/" + year;   
     db.run("INSERT INTO characters (name, date_created, date_completion) VALUES ($name, $created, $completed);", {
       $name: req.body.name,
-      $created: req.body.start,
+      $created: newdate,
       $completed: req.body.finish     
   }, (error)=>{
     if(error){
