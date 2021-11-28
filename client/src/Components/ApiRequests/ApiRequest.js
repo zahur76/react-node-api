@@ -64,9 +64,10 @@ function ApiRequests() {
         <div className="requests">
             <Header />
             <Row className="m-0">
-                <a href="/add_todo" className="btn bg-info text-success col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
+                <a href="/add_todo" className="btn add-todo col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
             </Row>                   
             {listItems}
+            
         </div>
     );
 }

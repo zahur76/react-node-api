@@ -2,8 +2,20 @@ img {
     width: 150px;
 }
 
-.accordion {
+.accordion-button {
+    background: #DBF4A7;
+}
+
+.accordion {    
     z-index: -1 !important;
+}
+
+.accordion-body {
+    background: #D9DBF1;
+}
+
+.add-todo {
+    background-color: #8E9DCC;
 }
 
 .btn {
@@ -18,7 +30,11 @@ img {
     }
 
     .btn {
-        font-size: 12px;
+        font-size: 14px;
         padding: 3px 3px 3px 3px;
+    }
+
+    .accordion-button {
+        padding: 5px 20px 5px 20px;
     }
 }

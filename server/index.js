@@ -1,6 +1,9 @@
 // server/index.js
 
 const express = require("express");
+var bodyParser = require('body-parser')
+
+var jsonParser = bodyParser.json()
 
 const sqlite3 = require('sqlite3');
 // open up the SQLite database in './db.sqlite'
@@ -72,6 +75,29 @@ app.get("/api/update/:id/:status", (req, res) => {
     }
   })  
 });
+
+app.post('/api/add_todo', jsonParser, function(req,res) {
+    console.log('shba')
+    console.log(req.body)    
+    db.run("INSERT INTO characters (name, date_created, date_completion) VALUES ($name, $created, $completed);", {
+      $name: req.body.name,
+      $created: req.body.start,
+      $completed: req.body.finish     
+  }, (error)=>{
+    if(error){
+      console.log(console.log(error))
+      res.send(error)
+    }else{
+      db.all("SELECT * FROM characters;", (error, rows) => { 
+        if(error){            
+            res.send(error)                        
+        }else{                        
+            res.send(JSON.stringify(rows));
+        }              
+      });
+    }
+  })          
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
