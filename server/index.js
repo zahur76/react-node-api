@@ -23,7 +23,7 @@ var client = new pg.Client(process.env.DB_URL);
 
 app.get("/api", (req, res) => {  
   client.connect(function(err) {
-    client.query("SELECT * FROM characters;", (error, rows) => { 
+    client.query("SELECT * FROM characters ORDER BY id ASC;", (error, rows) => { 
         if(error){            
             res.send(error) 
             console.log(error)                   
@@ -46,7 +46,7 @@ app.get('/api/delete/:id',function(req,res) {
                     console.log('error2')                    
                     res.send(error)
                 }else{                    
-                  client.query("SELECT * FROM characters;", (error, rows) => { 
+                  client.query("SELECT * FROM characters ORDER BY id ASC;", (error, rows) => { 
                     if(error){
                         console.log('error3')            
                         res.send(error)                        
@@ -67,7 +67,7 @@ app.get("/api/update/:id/:status", (req, res) => {
         console.log(error)
         res.send(error)
       }else{
-        client.query("SELECT * FROM characters;", (error, rows) => { 
+        client.query("SELECT * FROM characters ORDER BY id ASC;", (error, rows) => { 
           if(error){
               console.log('error2')            
               res.send(error)                        
@@ -91,7 +91,7 @@ app.post('/api/add_todo', jsonParser, function(req,res) {
         console.log(console.log(error))
         res.send(error)
       }else{
-        client.query("SELECT * FROM characters;", (error, rows) => { 
+        client.query("SELECT * FROM characters ORDER BY id ASC;", (error, rows) => { 
           if(error){            
               res.send(error)                        
           }else{                        
