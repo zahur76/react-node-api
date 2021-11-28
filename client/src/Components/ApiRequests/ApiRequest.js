@@ -11,7 +11,7 @@ function ApiRequests() {
     
 
     React.useEffect(() => {fetch("/api").then((res) => res.json())
-        .then((data) => setData(data));
+        .then((data) => setData(data));        
     }, []) 
     
     const DeleteItem=(event)=>{        
