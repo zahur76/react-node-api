@@ -33,7 +33,7 @@ function ApiRequests() {
     }    
         
     const listItems = (data || []).map((element) =>
-        <div className="text-center">
+        <div  key={element.id} className="text-center">
             <Accordion className="w-75 mx-auto mb-2" defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
                         <Accordion.Header>
