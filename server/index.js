@@ -3,6 +3,10 @@
 const express = require("express");
 var bodyParser = require('body-parser')
 
+//environment variables
+const dotenv = require('dotenv');
+dotenv.config();
+
 var jsonParser = bodyParser.json()
 
 const sqlite3 = require('sqlite3');
@@ -15,7 +19,7 @@ const db = new sqlite3.Database('./all_character.db', (err)=> {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -76,9 +80,7 @@ app.get("/api/update/:id/:status", (req, res) => {
   })  
 });
 
-app.post('/api/add_todo', jsonParser, function(req,res) {
-    console.log('shba')
-    console.log(req.body)    
+app.post('/api/add_todo', jsonParser, function(req,res) {      
     db.run("INSERT INTO characters (name, date_created, date_completion) VALUES ($name, $created, $completed);", {
       $name: req.body.name,
       $created: req.body.start,

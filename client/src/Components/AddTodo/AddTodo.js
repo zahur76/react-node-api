@@ -1,13 +1,12 @@
 import React from "react";
 import './AddTodo.css';
 import Header from '../Header/Header'
-import { Row } from "react-bootstrap";
 
 
 function AddTodo() {
     const [item, setData] = React.useState(null);
     const [create, setDate] = React.useState(null);
-    const [complete, setComplete] = React.useState(null);
+    const [complete, setComplete] = React.useState(null);    
     
     const handleNameChange = (event) => {
         setData(event.target.value);        
@@ -21,19 +20,17 @@ function AddTodo() {
         setComplete(event.target.value);
     } 
 
-    const handleSubmit = () => {
-        console.log(item)
-        console.log(create)
-        console.log(complete)
+    const handleSubmit = () => {        
         let endPoint = '/api/add_todo'
         let data = {'name': item, 'start': create, 'finish': complete}
         fetch(endPoint, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},body: JSON.stringify(data)}).then((res) => res.json())
-            .then((data) => setData(console.log(data)));          
+            .then((data) => setData(data));                      
     }    
+    
     return (
         <div className="text-center">
-            <Header />
-            <div className="row">
+            <Header />                                 
+            <div className="row m-0">
                 <div className="col-2">           
                     <a href="/" className="btn bg-black text-light m-1">Back</a>
                 </div>
