@@ -1,13 +1,15 @@
 // server/index.js
-
 const express = require("express");
+const path = require('path');
 var bodyParser = require('body-parser')
 
 //environment variables
 const dotenv = require('dotenv');
 dotenv.config();
-
 var jsonParser = bodyParser.json()
+
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 const sqlite3 = require('sqlite3');
 // open up the SQLite database in './db.sqlite'
@@ -100,6 +102,11 @@ app.post('/api/add_todo', jsonParser, function(req,res) {
     }
   })          
 })
+
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
