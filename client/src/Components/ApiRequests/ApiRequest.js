@@ -6,8 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion'
 
 function ApiRequests() {
-    const [data, setData] = React.useState(null);       
-    
+    const [data, setData] = React.useState(null);  
 
     React.useEffect(() => {fetch("/api").then((res) => res.json())
         .then((data) => setData(data));        
