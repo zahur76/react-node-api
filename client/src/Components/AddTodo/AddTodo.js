@@ -1,6 +1,5 @@
 import React from "react";
 import './AddTodo.css';
-import Header from '../Header/Header'
 
 
 function AddTodo() {
@@ -24,8 +23,7 @@ function AddTodo() {
     }    
     
     return (
-        <div className="text-center">
-            <Header />                                 
+        <div className="text-center">                                            
             <div className="row m-0">
                 <div className="col-2">           
                     <a href="/" className="btn bg-black text-light m-1">Back</a>

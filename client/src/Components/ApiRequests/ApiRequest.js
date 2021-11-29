@@ -1,6 +1,5 @@
 import React from "react";
 import './ApiRequests.css';
-import Header from '../Header/Header'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
@@ -61,13 +60,11 @@ function ApiRequests() {
         </div>
     );    
     return (
-        <div className="requests">
-            <Header />
+        <div className="requests">        
             <Row className="m-0">
                 <a href="/add_todo" className="btn add-todo col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
             </Row>                   
-            {listItems}
-            
+            {listItems}            
         </div>
     );
 }
