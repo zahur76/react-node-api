@@ -22,12 +22,34 @@ function Header() {
         }else{
             console.log('nopee')
         }                           
-    }; 
+    };
+    
+    const handleLogout = (event) =>{        
+        fetch('/api/login/logout').then((res) => res.json())
+        .then((data) => setLogin(data[0].login));                                   
+    };
+    
     
     useEffect(() => {fetch("/api/login").then((res) => res.json())
         .then((data) => [setUsername(data[0].username), setPassword(data[0].password), setLogin(data[0].login)]);        
     }, [])
-    
+
+    console.log({login})
+    const renderLogin = () => {
+        if({login}.login==='login'){
+            return  <Col xs={3} className="my-auto" >
+                        <div className="btn text-light" onClick={handleShow}>
+                            {login}                                              
+                        </div>
+                    </Col>
+        }else{
+            return <Col xs={3} className="my-auto" >
+                        <div className="btn text-light" onClick={handleLogout}>
+                            {login}                                              
+                        </div>
+                    </Col>
+            }
+    }
 
     const handleFormUsername = (event) => {
         setFormUsername(event.target.value);        
@@ -41,11 +63,7 @@ function Header() {
         <div className="header text-center">
             <Row>
                 <Col xs={9}><h1>Node-React-Todo</h1></Col>                               
-                <Col xs={3} className="my-auto" >
-                    <div className="btn text-light" onClick={handleShow}>
-                        {login}                        
-                    </div>
-                </Col>
+                {renderLogin()}
             </Row>  
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

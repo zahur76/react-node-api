@@ -72,6 +72,24 @@ app.get("/api/login/login", (req,res)=>{
   });
 })
 
+app.get("/api/login/logout", (req,res)=>{
+  var clientTwo = new pg.Client(process.env.DB_URL_TWO);
+  clientTwo.connect((err) => {
+    if(err){
+      console.log(err)
+    }else{
+      clientTwo.query("UPDATE users SET login=$1 ", ['login'],(error, rows) => {
+        if(error){
+          res.send(error)
+        }else{
+          console.log(rows.rows)                  
+          res.send(JSON.stringify(rows.rows));
+          clientTwo.end() 
+        }
+      })
+    }
+  });
+})
 
 app.get('/api/delete/:id',function(req,res) {
   client.connect(function(err) {    
