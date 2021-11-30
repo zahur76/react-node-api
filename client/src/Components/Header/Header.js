@@ -47,15 +47,17 @@ function Header() {
     const renderLogin = () => {
         if(localStorage.getItem("login")==='true'){
             return  <div>
-                        <Row className="header">
-                            <Col xs={9} md={10} className="logo h1 my-auto">Node-React-Todo</Col>
+                        <Row className="header m-0">
+                            <Col xs={0} md={2} className="logo h1 my-auto"></Col>
+                            <Col xs={9} md={8} className="logo h1 my-auto">Node-React-Todo</Col>
                             <Col xs={3} md={2} className="links btn text-light my-auto" onClick={handleLogout}>logout</Col>
                         </Row>                        
                     </div> 
                     
         }else{
-            return <Row className="header">
-                        <Col xs={9} md={10} className="logo h1 my-auto">Node-React-Todo</Col>
+            return <Row className="header m-0">
+                        <Col xs={0} md={2} className="logo h1 my-auto"></Col>
+                        <Col xs={9} md={8} className="logo h1 my-auto">Node-React-Todo</Col>
                         <Col xs={3} md={2} className="links btn text-light my-auto" onClick={handleShow}>login</Col>               
                     </Row>
         }   
