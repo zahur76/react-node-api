@@ -27,7 +27,8 @@ function Header() {
 
     const handleLogout = () =>{        
         localStorage.setItem("login", "false")
-        setLogin('login')                                                         
+        setLogin('login')
+        window.location.reload(false);                                                         
     };
     
     

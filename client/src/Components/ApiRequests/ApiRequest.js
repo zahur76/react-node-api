@@ -7,7 +7,7 @@ import Accordion from 'react-bootstrap/Accordion'
 import AddItem from "../AddItem/AddItem";
 
 function ApiRequests() {
-    const [data, setData] = React.useState(null);  
+    const [data, setData] = React.useState(null);       
 
     React.useEffect(() => {fetch("/api").then((res) => res.json())
         .then((data) => setData(data));        
@@ -32,7 +32,7 @@ function ApiRequests() {
     }
     
     const renderLogin = () => {
-        if(localStorage.getItem("login")==='true'){
+        if(localStorage.getItem("login")==='true'){            
             return  <AddItem />
                     
         }else{
