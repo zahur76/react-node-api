@@ -9,7 +9,7 @@ function Header() {
     const [show, setShow] = useState(false);
     const [login, setLogin] = useState(null);    
     const [username, setUsername] = useState(null)
-    const [password, setPassword] = useState(null)
+    const [password, setPassword] = useState(null)    
     const [formUsername, setFormUsername] = useState(null)
     const [formPassword, setFormpassword] = useState(null)       
     const handleClose = () => setShow(false);
@@ -23,11 +23,11 @@ function Header() {
         }else{
             console.log('nopee')
         }                           
-    }; 
-    
+    };   
+
     const handleLogout = () =>{        
         localStorage.setItem("login", "false")
-        setLogin('login')                                                  
+        setLogin('login')                                                         
     };
     
     
@@ -49,10 +49,7 @@ function Header() {
                         <Row className="header">
                             <Col xs={9} md={10} className="logo h1 my-auto">Node-React-Todo</Col>
                             <Col xs={3} md={2} className="links btn text-light my-auto" onClick={handleLogout}>logout</Col>
-                        </Row>
-                        <Col xs={12} className="my-auto">
-                            <a href="/add_todo" className="add-todo links btn w-75 text-dark my-auto mt-2 mb-2">add item</a>
-                        </Col>
+                        </Row>                        
                     </div> 
                     
         }else{
@@ -64,7 +61,7 @@ function Header() {
     }
     
     return (
-        <div className="text-center">            
+        <div className="text-center">                        
             {renderLogin()}             
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

@@ -31,7 +31,7 @@ function AddTodo() {
     }    
     
     return (               
-        <div className="text-center">
+        <div className="text-center mt-2">
             {redirect}                                                       
             <div className="row m-0">
                 <div className="col-2">           

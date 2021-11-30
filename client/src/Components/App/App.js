@@ -21,8 +21,7 @@ class App extends React.Component {
             <Route path="/add_todo" element={<AddTodo />} />                                         
           </Routes> 
         </BrowserRouter>
-      </div>    
-           
+      </div>          
     );
   }  
 }

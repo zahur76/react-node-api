@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button';
 import Accordion from 'react-bootstrap/Accordion'
+import AddItem from "../AddItem/AddItem";
 
 function ApiRequests() {
     const [data, setData] = React.useState(null);  
@@ -28,8 +29,16 @@ function ApiRequests() {
         }        
         fetch(endPoint).then((res) => res.json())
             .then((data) => setData(data));                     
-    }    
+    }
     
+    const renderLogin = () => {
+        if(localStorage.getItem("login")==='true'){
+            return  <AddItem />
+                    
+        }else{
+            return <div></div>
+        }   
+    }    
     const listItems = (data || []).map((element) =>
         <div  key={element.id} className="text-center">
             <Accordion className="w-75 mx-auto mb-2" defaultActiveKey="1">
@@ -59,7 +68,8 @@ function ApiRequests() {
         </div>
     );    
     return (
-        <div className="requests mt-2">                    
+        <div className="requests mt-2">
+            {renderLogin()}
             {listItems}            
         </div>
     );
