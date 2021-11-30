@@ -29,7 +29,7 @@ function ApiRequests() {
         fetch(endPoint).then((res) => res.json())
             .then((data) => setData(data));                     
     }    
-        
+    
     const listItems = (data || []).map((element) =>
         <div  key={element.id} className="text-center">
             <Accordion className="w-75 mx-auto mb-2" defaultActiveKey="1">
@@ -59,10 +59,7 @@ function ApiRequests() {
         </div>
     );    
     return (
-        <div className="requests">        
-            <Row className="m-0">
-                <a href="/add_todo" className="btn add-todo col-12 mt-3 mb-3 w-75 mx-auto">Add Item</a>
-            </Row>                   
+        <div className="requests mt-2">                    
             {listItems}            
         </div>
     );

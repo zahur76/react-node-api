@@ -14,42 +14,26 @@ function Header() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    
-    const handleLogin = (event) =>{      
-        if({formUsername}.formUsername==={username}.username){
-            fetch('/api/login/login').then((res) => res.json())
-            .then((data) => setLogin(data[0].login));
+    console.log(localStorage.getItem("login"))
+    const handleLogin = () =>{              
+        if({formUsername}.formUsername==={username}.username && {formPassword}.formPassword==={password}.password){
+            localStorage.setItem("login", "true")
+            setLogin('logout')
         }else{
             console.log('nopee')
         }                           
-    };
+    }; 
     
-    const handleLogout = (event) =>{        
-        fetch('/api/login/logout').then((res) => res.json())
-        .then((data) => setLogin(data[0].login));                                   
+    const handleLogout = () =>{ 
+        console.log('agaiiudiald') 
+        localStorage.setItem("login", "false")
+        setLogin('login')                                   
     };
     
     
     useEffect(() => {fetch("/api/login").then((res) => res.json())
-        .then((data) => [setUsername(data[0].username), setPassword(data[0].password), setLogin(data[0].login)]);        
-    }, [])
-
-    console.log({login})
-    const renderLogin = () => {
-        if({login}.login==='login'){
-            return  <Col xs={3} className="my-auto" >
-                        <div className="btn text-light" onClick={handleShow}>
-                            {login}                                              
-                        </div>
-                    </Col>
-        }else{
-            return <Col xs={3} className="my-auto" >
-                        <div className="btn text-light" onClick={handleLogout}>
-                            {login}                                              
-                        </div>
-                    </Col>
-            }
-    }
+        .then((data) => [setUsername(data[0].username), setPassword(data[0].password)]);        
+    }, [])    
 
     const handleFormUsername = (event) => {
         setFormUsername(event.target.value);        
@@ -57,14 +41,32 @@ function Header() {
 
     const handleFormPassword = (event) => {
         setFormpassword(event.target.value);        
-    }     
+    }
+    
+    const renderLogin = () => {
+        if(localStorage.getItem("login")==='true'){
+            return  <div>
+                        <Row className="header">
+                            <Col xs={9} md={10} className="logo h1 my-auto">Node-React-Todo</Col>
+                            <Col xs={3} md={2} className="links btn text-light my-auto" onClick={handleLogout}>logout</Col>
+                                             
+                        </Row>
+                        <Col xs={12} className="my-auto">
+                            <a href="/add_todo" className="add-todo links btn w-75 text-dark my-auto mt-2 mb-2">add item</a>
+                        </Col>
+                    </div> 
+                    
+        }else{
+            return <Row className="header">
+                        <Col xs={9} md={10} className="logo h1 my-auto">Node-React-Todo</Col>
+                        <Col xs={3} md={2} className="links btn text-light my-auto" onClick={handleShow}>login</Col>               
+                    </Row>
+        }   
+    }
     
     return (
-        <div className="header text-center">
-            <Row>
-                <Col xs={9}><h1>Node-React-Todo</h1></Col>                               
-                {renderLogin()}
-            </Row>  
+        <div className="text-center">
+            {renderLogin()}             
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Enter Login details</Modal.Title>

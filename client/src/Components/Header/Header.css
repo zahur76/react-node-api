@@ -6,10 +6,32 @@ h1 {
     margin: 0;
 }
 
+.add-todo {
+    background-color: #8E9DCC;
+}
+
 .modal-title {   
     margin: 0 auto;
 }
 
 .modal-header {   
     padding: 5px;
+}
+
+.modal {
+    top: 20%;
+}
+
+.modal-content {
+    background: rgba(255, 0, 0, 0.7);
+}
+
+@media screen and (max-width: 576px){
+    .logo {
+        font-size: 20px;
+    }
+
+    .links {
+        font-size: 13px;
+    }
 }
