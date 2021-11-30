@@ -1,19 +1,27 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
+import { Navigate } from "react-router";
 import './AddTodo.css';
 
 
 function AddTodo() {
-    const [item, setData] = React.useState(null);
-    const [create, setDate] = React.useState(null);
-    const [complete, setComplete] = React.useState(null);    
-    
+    const [item, setData] = useState(null);
+    const [create, setDate] = useState(null);
+    const [complete, setComplete] = useState(null);
+    const [redirect, setRedirect] = useState(null);
+       
     const handleNameChange = (event) => {
         setData(event.target.value);        
     }    
     
     const handleCompleteChange = (event) => {        
         setComplete(event.target.value);
-    } 
+    }    
+    
+    useEffect(() => {
+        if(localStorage.getItem("login")==='false'){            
+            setRedirect(<Navigate to='/' />)                      
+        }               
+    }, []) 
 
     const handleSubmit = () => {        
         let endPoint = '/api/add_todo'
@@ -22,8 +30,9 @@ function AddTodo() {
             .then((data) => setData(data));                      
     }    
     
-    return (
-        <div className="text-center">                                            
+    return (               
+        <div className="text-center">
+            {redirect}                                                       
             <div className="row m-0">
                 <div className="col-2">           
                     <a href="/" className="btn bg-black text-light m-1">Back</a>
@@ -35,7 +44,7 @@ function AddTodo() {
                 <input className="col-12 m-1" type="text" name={item} onChange={handleNameChange} placeholder="Item Name" required/>
                 <input className="col-12 m-1" type="text" name={complete} onChange={handleCompleteChange} placeholder="Date to complete" required/>  
                 <input className="w-50 btn bg-dark text-light mt-2" type="submit" value="Submit" />                
-            </form>                      
+            </form>                                 
         </div>
     );
 }

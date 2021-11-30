@@ -2,7 +2,6 @@
     justify-content: left;
 }
 
-
 @media screen and (max-width: 576px){
     .form-add-todo {
         width: 75% !important;
